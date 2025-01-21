@@ -38,7 +38,7 @@ pipeline {
         
         stage('Upload to Artifactory') {
 			steps {
-				bat 'jf rt upload --url=http://localhost:8082/ --server-id=artifactory-server "InventoryManagement\\API\\publish\\**" nuget-local/'
+				bat 'jf rt upload --url=http://localhost:8082//artifactory --server-id=artifactory-server "InventoryManagement\\API\\publish\\**" nuget-local/'
 			}
 		}
 
