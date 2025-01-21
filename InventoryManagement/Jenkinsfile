@@ -20,21 +20,21 @@ pipeline {
         
         stage('Build') {
     steps {
-        bat 'cd InventoryManagement/API'
+        bat 'cd InventoryManagement\\API'
         bat 'dotnet build InventoryManagement.sln --configuration Release'
     }
 }
 
 stage('Test') {
     steps {
-        bat 'cd InventoryManagement/API'
+        bat 'cd InventoryManagement\\API'
         bat 'dotnet test API/InventoryManagement.csproj --configuration Release --no-build'
     }
 }
 
 stage('Publish') {
     steps {
-        bat 'cd InventoryManagement/API'
+        bat 'cd InventoryManagement\\API'
         bat 'dotnet publish API/InventoryManagement.csproj --configuration Release --output ./publish'
     }
 }
