@@ -45,5 +45,18 @@ pipeline {
                 )
             }
         }
+		
+		rtUpload (
+			serverId: "artifactory-server",
+			spec: '''{
+				"files": [
+					{
+						"pattern": "bin/Release/net8.0/publish/",
+						"target": "nuget-local/"
+					}
+				]
+			}'''
+		)
+
     }
 }
