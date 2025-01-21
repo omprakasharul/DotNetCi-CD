@@ -14,31 +14,27 @@ pipeline {
         
         stage('Restore Dependencies') {
             steps {
-                bat 'dotnet restore'
+                bat 'cd InventoryManagement\\API && dotnet restore'
             }
         }
         
         stage('Build') {
-    steps {
-        bat 'cd InventoryManagement\\API'
-        bat 'dotnet build InventoryManagement.sln --configuration Release'
-    }
-}
+            steps {
+                bat 'cd InventoryManagement\\API && dotnet build --configuration Release'
+            }
+        }
 
-stage('Test') {
-    steps {
-        bat 'cd InventoryManagement\\API'
-        bat 'dotnet test API/InventoryManagement.csproj --configuration Release --no-build'
-    }
-}
+        stage('Test') {
+            steps {
+                bat 'cd InventoryManagement\\API && dotnet test --configuration Release --no-build'
+            }
+        }
 
-stage('Publish') {
-    steps {
-        bat 'cd InventoryManagement\\API'
-        bat 'dotnet publish API/InventoryManagement.csproj --configuration Release --output ./publish'
-    }
-}
-
+        stage('Publish') {
+            steps {
+                bat 'cd InventoryManagement\\API && dotnet publish --configuration Release --output .\\publish'
+            }
+        }
         
         stage('Upload to Artifactory') {
             steps {
@@ -47,7 +43,7 @@ stage('Publish') {
                     spec: '''{
                         "files": [
                             {
-                                "pattern": "publish/",
+                                "pattern": "InventoryManagement\\API\\publish\\**",
                                 "target": "nuget-local/"
                             }
                         ]
