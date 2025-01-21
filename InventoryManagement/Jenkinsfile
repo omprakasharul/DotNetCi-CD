@@ -37,20 +37,21 @@ pipeline {
         }
         
         stage('Upload to Artifactory') {
-            steps {
-                rtUpload (
-                    serverId: "artifactory-server",
-                    spec: '''{
-                        "files": [
-                            {
-                                "pattern": "InventoryManagement\\API\\publish\\**",
-                                "target": "nuget-local/"
-                            }
-                        ]
-                    }'''
-                )
-            }
-        }
+    steps {
+        rtUpload (
+            serverId: "artifactory-server",
+            spec: '''{
+                "files": [
+                    {
+                        "pattern": "InventoryManagement\\API\\publish\\**",
+                        "target": "nuget-local/"
+                    }
+                ]
+            }'''
+        )
+    }
+}
+
     }
     
     post {
