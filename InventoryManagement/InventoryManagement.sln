@@ -15,9 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BAL", "BAL\BAL.csproj", "{34F4187D-37E6-4EFF-85B1-FA7472544B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{D1693B4C-01D4-4EE0-ADA4-7EBBFA79479A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{D1693B4C-01D4-4EE0-ADA4-7EBBFA79479A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BOL", "BOL\BOL.csproj", "{10AC2CAC-D219-4126-8902-E48FE383144C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5183DE2-56D0-408B-A41C-E606BF6AF1B7}"
+	ProjectSection(SolutionItems) = preProject
+		Jenkinsfile.txt = Jenkinsfile.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

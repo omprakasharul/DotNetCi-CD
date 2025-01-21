@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+    
+    tools {
+        dotnetsdk 'dotnet-sdk-8.0'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh 'dotnet build'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                sh 'dotnet test'
+            }
+        }
+        
+        stage('Publish') {
+            steps {
+                sh 'dotnet publish -c Release'
+            }
+        }
+        
+        stage('Upload to Artifactory') {
+            steps {
+                rtUpload (
+                    serverId: "ARTIFACTORY_SERVER_ID",
+                    spec: '''{
+                        "files": [
+                            {
+                                "pattern": "bin/Release/net8.0/publish/",
+                                "target": "nuget-local/"
+                            }
+                        ]
+                    }'''
+                )
+            }
+        }
+    }
+}
