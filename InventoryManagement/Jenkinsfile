@@ -38,9 +38,10 @@ pipeline {
         
         stage('Upload to Artifactory') {
 			steps {
-				bat 'jfrog rt upload "InventoryManagement\\API\\publish\\**" nuget-local/'
+				jf 'rt upload "InventoryManagement\\API\\publish\\**" nuget-local/'
 			}
 		}
+
 
 
 	}
