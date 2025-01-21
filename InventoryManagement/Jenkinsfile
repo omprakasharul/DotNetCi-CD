@@ -12,32 +12,38 @@ pipeline {
             }
         }
         
+        stage('Restore Dependencies') {
+            steps {
+                sh 'dotnet restore'
+            }
+        }
+        
         stage('Build') {
             steps {
-                sh 'dotnet build'
+                sh 'dotnet build --configuration Release'
             }
         }
         
         stage('Test') {
             steps {
-                sh 'dotnet test'
+                sh 'dotnet test --configuration Release --no-build'
             }
         }
         
         stage('Publish') {
             steps {
-                sh 'dotnet publish -c Release'
+                sh 'dotnet publish --configuration Release --output ./publish'
             }
         }
         
         stage('Upload to Artifactory') {
             steps {
                 rtUpload (
-                    serverId: "ARTIFACTORY_SERVER_ID",
+                    serverId: "artifactory-server",
                     spec: '''{
                         "files": [
                             {
-                                "pattern": "bin/Release/net8.0/publish/",
+                                "pattern": "publish/",
                                 "target": "nuget-local/"
                             }
                         ]
@@ -45,21 +51,14 @@ pipeline {
                 )
             }
         }
-		stage('Upload to Artifactory') {
-			steps {
-				rtUpload (
-					serverId: "artifactory-server",
-					spec: '''{
-						"files": [
-							{
-								"pattern": "bin/Release/net8.0/publish/",
-								"target": "nuget-local/"
-							}
-						]
-					}'''
-				)
-			}
-		}
-
+    }
+    
+    post {
+        success {
+            echo 'Build completed successfully!'
+        }
+        failure {
+            echo 'Build failed.'
+        }
     }
 }
