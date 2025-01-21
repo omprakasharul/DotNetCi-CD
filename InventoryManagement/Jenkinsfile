@@ -38,7 +38,7 @@ pipeline {
         
         stage('Upload to Artifactory') {
 			steps {
-				jf 'rt upload "InventoryManagement\\API\\publish\\**" nuget-local/'
+				bat 'jf rt upload "InventoryManagement\\API\\publish\\**" nuget-local/'
 			}
 		}
 
